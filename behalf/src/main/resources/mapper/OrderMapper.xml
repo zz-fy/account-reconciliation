@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zfy.behalf.mapper.OrderMapper">
+
+    <select id="queryList" resultType="cn.zfy.behalf.bo.OrderInfo"
+            parameterType="cn.zfy.behalf.dto.biz.OrderSearchDto">
+        SELECT
+        o.*,
+        sa.name AS sold_account_name,
+        sp.name AS solc_platform_name,
+        p.name AS product_name,
+        p.issuing_company_id AS issuing_company_id,
+        p.issuing_url AS issuing_url,
+        ic.name AS issuing_company_name,
+        ic.issuing_platform_id AS issuing_platform_id,
+        ip.name AS issuing_platform_name,
+        os.id AS order_customer_id,
+        os.nickname AS customer_nickname,
+        os.real_name AS customer_real_name,
+        os.phone AS customer_phone,
+        os.address AS customer_address,
+        sp.name AS sold_platform_name
+        FROM `order` o
+        LEFT JOIN sold_account sa ON o.sold_account_id = sa.id
+        LEFT JOIN sold_platform sp ON o.sold_platform_id = sp.id
+        LEFT JOIN product p ON o.product_id = p.id
+        LEFT JOIN issuing_company ic ON p.issuing_company_id = ic.id
+        LEFT JOIN issuing_platform ip ON ic.issuing_platform_id = ip.id
+        LEFT JOIN order_customer os ON o.id = os.order_id
+        <if test="searchDto!=null">
+            <where>
+                <if test="searchDto.orderId!=null">
+                    AND o.id = #{searchDto.orderId}
+                </if>
+                <if test="searchDto.orderStartTime!=null and searchDto.orderStartTime!=''">
+                    AND o.order_time <![CDATA[ >= ]]> #{searchDto.orderStartTime}
+                </if>
+                <if test="searchDto.orderEndTime!=null and searchDto.orderEndTime!=''">
+                    AND o.order_time <![CDATA[ <= ]]> #{searchDto.orderEndTime}
+                </if>
+                <if test="searchDto.productId!=null">
+                    AND o.product_id = #{searchDto.productId}
+                </if>
+                <if test="searchDto.customerNickname!=null and searchDto.customerNickname!=''">
+                    AND os.nickname LIKE CONCAT('%',#{searchDto.customerNickname},'%')
+                </if>
+                <if test="searchDto.customerRealName!=null and searchDto.customerRealName!=''">
+                    AND os.real_name LIKE CONCAT('%',#{searchDto.customerRealName},'%')
+                </if>
+                <if test="searchDto.customerPhone!=null and searchDto.customerPhone!=''">
+                    AND os.phone LIKE CONCAT('%',#{searchDto.customerPhone},'%')
+                </if>
+                <if test="searchDto.status!=null">
+                    AND o.`status` = #{searchDto.status}
+                </if>
+                <if test="searchDto.soldAccountId!=null">
+                    AND o.sold_account_id = #{searchDto.soldAccountId}
+                </if>
+                <if test="searchDto.soldPlatformId!=null">
+                    AND o.sold_platform_id = #{searchDto.soldPlatformId}
+                </if>
+                <if test="searchDto.issuingCompanyId!=null">
+                    AND p.issuing_company_id = #{searchDto.issuingCompanyId}
+                </if>
+                <if test="searchDto.issuingPlatformId!=null">
+                    AND ic.issuing_platform_id = #{searchDto.issuingPlatformId}
+                </if>
+            </where>
+        </if>
+        ORDER BY  o.order_time DESC
+    </select>
+</mapper>

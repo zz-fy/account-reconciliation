@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zfy.behalf.mapper.SoldAccountMapper">
+
+    <select id="selectCountQuote" resultType="java.lang.Integer" parameterType="java.io.Serializable">
+         SELECT sum(c) FROM
+	    (
+		    SELECT count(*) AS c FROM `order` WHERE sold_account_id = #{id}
+	    ) AS tmp
+    </select>
+    <select id="queryList" resultType="cn.zfy.behalf.entity.po.SoldAccount"
+            parameterType="cn.zfy.behalf.dto.biz.SoldAccountPageSearchDto">
+        SELECT * FROM sold_account
+        <where>
+            <if test="searchDto.name!=null and searchDto.name!=''">
+                AND `name` LIKE concat('%',#{searchDto.name},'%')
+            </if>
+            <if test="searchDto.phone!=null and searchDto.phone!=''">
+                AND `phone` LIKE concat('%',#{searchDto.phone},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

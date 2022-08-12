@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zfy.behalf.mapper.SoldPlatformMapper">
+
+    <select id="selectCountQuote" resultType="java.lang.Integer" parameterType="java.io.Serializable">
+        SELECT sum(c) FROM
+	    (
+		    SELECT count(*) AS c FROM `order` WHERE sold_platform_id = #{id}
+	    ) AS tmp
+    </select>
+    <select id="queryList" resultType="cn.zfy.behalf.entity.po.SoldPlatform"
+            parameterType="cn.zfy.behalf.dto.biz.SoldPlatformPageSearchDto">
+        SELECT * FROM sold_platform
+        <where>
+            <if test="searchDto.name!=null and searchDto.name!=''">
+                AND `name` LIKE concat('%',#{searchDto.name},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

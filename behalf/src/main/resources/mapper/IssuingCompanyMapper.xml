@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zfy.behalf.mapper.IssuingCompanyMapper">
+
+    <select id="countQuote" resultType="java.lang.Integer" parameterType="java.io.Serializable">
+        SELECT sum(c) FROM
+	    (
+		    SELECT count(*) AS c FROM product WHERE issuing_company_id = #{id}
+	    ) AS tmp
+    </select>
+    <select id="queryList" resultType="cn.zfy.behalf.vo.IssuingCompanyVo"
+            parameterType="cn.zfy.behalf.dto.biz.IssuingCompanyPageSearchDto">
+        SELECT issuing_company.*,issuing_platform.name AS issuing_platform_name
+        FROM issuing_company
+        INNER JOIN issuing_platform ON issuing_company.issuing_platform_id = issuing_platform.id
+        <if test="searchDto!=null">
+            <where>
+                <if test="searchDto.issuingPlatformId!=null">
+                    AND issuing_company.issuing_platform_id = #{searchDto.issuingPlatformId}
+                </if>
+                <if test="searchDto.name!=null and searchDto.name!=''">
+                    AND issuing_company.`name` LIKE concat('%',#{searchDto.name},'%')
+                </if>
+            </where>
+        </if>
+    </select>
+</mapper>
