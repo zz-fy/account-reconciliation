@@ -12,6 +12,7 @@ import org.apache.commons.lang.time.DateUtils;
 import org.springframework.util.Base64Utils;
 
 import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 /**
@@ -45,7 +46,7 @@ public class JwtUtils {
         try {
             String infoBase64 = jwt.split("\\.")[1];
             byte[] bytes = Base64Utils.decodeFromString(infoBase64);
-            String decodeInfo = new String(bytes, "UTF-8");
+            String decodeInfo = new String(bytes, StandardCharsets.UTF_8);
             return JSON.parseObject(decodeInfo, UserAuthInfo.class);
         } catch (Exception e) {
             throw new CustomException("解析JWT异常,获取用户登录信息失败..");

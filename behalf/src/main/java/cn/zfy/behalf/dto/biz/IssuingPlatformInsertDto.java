@@ -3,7 +3,6 @@ package cn.zfy.behalf.dto.biz;
 import lombok.Data;
 
 import org.hibernate.validator.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Data
 public class IssuingPlatformInsertDto {

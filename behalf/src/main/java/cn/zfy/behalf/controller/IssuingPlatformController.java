@@ -9,7 +9,6 @@ import cn.zfy.behalf.entity.po.IssuingPlatform;
 import cn.zfy.behalf.entity.response.base.BaseResponse;
 import cn.zfy.behalf.entity.response.base.PageList;
 import cn.zfy.behalf.service.IssuingPlatformService;
-import cn.zfy.behalf.vo.IssuingCompanyVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

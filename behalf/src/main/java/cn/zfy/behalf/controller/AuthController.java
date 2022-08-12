@@ -9,7 +9,6 @@ import cn.zfy.behalf.entity.response.auth.LoginResponse;
 import cn.zfy.behalf.entity.response.auth.UserInfoResponse;
 import cn.zfy.behalf.entity.response.base.BaseResponse;
 import cn.zfy.behalf.service.AuthService;
-import cn.zfy.behalf.service.UserService;
 import cn.zfy.behalf.utils.AuthUtils;
 import cn.zfy.behalf.utils.RedisUtils;
 import org.springframework.web.bind.annotation.*;

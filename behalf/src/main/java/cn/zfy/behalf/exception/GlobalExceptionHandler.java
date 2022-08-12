@@ -19,8 +19,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public BaseResponse MethodArgumentNotValidHandler(HttpServletRequest request,
-                                                      Exception exception) throws Exception {
+    public BaseResponse methodArgumentNotValidHandler(Exception exception) {
         String message = StringUtils.isEmpty(exception.getMessage()) ? exception.toString() : exception.getMessage();
         return BaseResponse.error(message);
     }
@@ -31,7 +30,7 @@ public class GlobalExceptionHandler {
         // 1.校验
         Boolean fieldErrorUnobtainable = (e == null || e.getBindingResult() == null
                 || CollectionUtils.isEmpty(e.getBindingResult().getAllErrors()) || e.getBindingResult().getAllErrors().get(0) == null);
-        if (fieldErrorUnobtainable) {
+        if (Boolean.TRUE.equals(fieldErrorUnobtainable)) {
             return BaseResponse.ok();
         }
 

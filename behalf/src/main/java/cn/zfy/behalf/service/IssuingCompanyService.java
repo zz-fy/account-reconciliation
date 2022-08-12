@@ -8,7 +8,6 @@ import cn.zfy.behalf.entity.response.base.PageList;
 import cn.zfy.behalf.vo.IssuingCompanyVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import java.util.List;
 
 public interface IssuingCompanyService extends IService<IssuingCompany> {
 

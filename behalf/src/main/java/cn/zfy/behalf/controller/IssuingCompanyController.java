@@ -4,7 +4,6 @@ package cn.zfy.behalf.controller;
 import cn.zfy.behalf.dto.biz.IssuingCompanyInsertDto;
 import cn.zfy.behalf.dto.biz.IssuingCompanyModifyDto;
 import cn.zfy.behalf.dto.biz.IssuingCompanyPageSearchDto;
-import cn.zfy.behalf.entity.po.IssuingCompany;
 import cn.zfy.behalf.entity.response.base.BaseResponse;
 import cn.zfy.behalf.entity.response.base.PageList;
 import cn.zfy.behalf.service.IssuingCompanyService;

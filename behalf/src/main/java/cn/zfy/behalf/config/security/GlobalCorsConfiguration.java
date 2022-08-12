@@ -19,8 +19,6 @@ public class GlobalCorsConfiguration {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        /*config.addAllowedOriginPattern("*");
-        config.addAllowedOriginPattern("http://localhost:9527");*/
         config.addAllowedOrigin("*");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
