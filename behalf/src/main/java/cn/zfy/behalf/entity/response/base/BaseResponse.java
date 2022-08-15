@@ -63,7 +63,7 @@ public class BaseResponse<T> {
      * @return 响应
      */
     public static <T> BaseResponse ok(String message, T data) {
-        BaseResponse<T> baseResponse = new BaseResponse<T>();
+        BaseResponse<T> baseResponse = new BaseResponse<>();
         baseResponse.setCode(1);
         baseResponse.setMessage(message);
         baseResponse.setSuccess(true);
@@ -78,7 +78,7 @@ public class BaseResponse<T> {
      * @return 响应
      */
     public static <T> BaseResponse ok(T data) {
-        BaseResponse<T> baseResponse = new BaseResponse<T>();
+        BaseResponse<T> baseResponse = new BaseResponse<>();
         baseResponse.setCode(1);
         baseResponse.setData(data);
         baseResponse.setSuccess(true);
@@ -108,7 +108,7 @@ public class BaseResponse<T> {
      * @return 响应
      */
     public static <T> BaseResponse error(String message, T data) {
-        BaseResponse<T> baseResponse = new BaseResponse<T>();
+        BaseResponse<T> baseResponse = new BaseResponse<>();
         baseResponse.setCode(0);
         baseResponse.setMessage(message);
         baseResponse.setSuccess(false);
